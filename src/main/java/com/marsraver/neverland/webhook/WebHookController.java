@@ -19,7 +19,7 @@ public class WebHookController {
     @PostMapping
     public ResponseEntity<Member> register(@RequestBody Registration registration) {
         return ResponseEntity.ok(
-                webHookSoundService.register(registration.hostName, "http://" + registration.hostName + ":8080/sound/play"));
+                webHookSoundService.register(registration.hostName, "http://" + registration.hostName + ":8080/sound/play", registration.getSound()));
     }
 
     @DeleteMapping("{hostName}")
@@ -35,15 +35,15 @@ public class WebHookController {
     }
 
     @GetMapping("play")
-    public ResponseEntity<Void> play(Sound sound) {
-        webHookSoundService.playSound(sound);
+    public ResponseEntity<Void> play() {
+        webHookSoundService.playSound();
         return ResponseEntity.ok(null);
     }
 
     @Data
     public static class Registration {
-
         private String hostName;
+        private Sound sound = Sound.SONAR_PING;
     }
 
 }

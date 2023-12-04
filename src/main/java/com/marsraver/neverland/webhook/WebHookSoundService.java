@@ -22,12 +22,15 @@ public class WebHookSoundService {
 
     private Map<String, Member> members = new HashMap<>();
 
-    public void playSound(Sound sound) {
-        members.values().forEach(member -> executorService.submit(new SoundCall(member, sound)));
+    public void playSound() {
+        members.values().forEach(member -> executorService.submit(new SoundCall(member, member.getSound())));
     }
 
-    public Member register(String hostName, String rootUrl) {
-        return members.put(hostName, new Member(hostName, rootUrl));
+    public Member register(String hostName, String rootUrl, Sound sound) {
+        return  (hostName != null) ?
+         members.put(hostName, new Member(hostName, rootUrl, sound))
+                : null;
+
     }
 
     public Member unRegister(String hostName) {
@@ -54,9 +57,9 @@ public class WebHookSoundService {
     @Data
     @AllArgsConstructor
     public static final class Member {
-
         private String hostName;
         private String rootUrl;
+        private Sound sound;
     }
 
 }
