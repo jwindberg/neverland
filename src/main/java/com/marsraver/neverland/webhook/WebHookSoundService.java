@@ -18,17 +18,21 @@ public class WebHookSoundService {
 
     ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-    private RestTemplate restTemplate = new RestTemplate();
+    private RestTemplate restTemplate;
 
     private Map<String, Member> members = new HashMap<>();
+
+    public WebHookSoundService(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     public void playSound() {
         members.values().forEach(member -> executorService.submit(new SoundCall(member, member.getSound())));
     }
 
     public Member register(String hostName, String rootUrl, Sound sound) {
-        return  (hostName != null) ?
-         members.put(hostName, new Member(hostName, rootUrl, sound))
+        return (hostName != null) ?
+                members.put(hostName, new Member(hostName, rootUrl, sound))
                 : null;
 
     }
