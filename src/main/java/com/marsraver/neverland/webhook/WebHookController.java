@@ -40,6 +40,12 @@ public class WebHookController {
         return ResponseEntity.ok(null);
     }
 
+    @GetMapping("playOneAtAtTime")
+    public ResponseEntity<Void> playOneAtAtTime() {
+        webHookSoundService.playOneAtAtTime();
+        return ResponseEntity.ok(null);
+    }
+
     @Data
     public static class Registration {
         private String hostName;

@@ -27,7 +27,16 @@ public class WebHookSoundService {
     }
 
     public void playSound() {
-        members.values().forEach(member -> executorService.submit(new SoundCall(member, member.getSound())));
+        members.values().forEach(member -> executorService.submit(new SoundCall(member)));
+    }
+
+    public void playOneAtAtTime() {
+        members.values().forEach(member -> {
+
+            restTemplate.getForEntity(member.rootUrl + "?sound=" + member.getSound().name(), String.class)
+                    .getBody();
+
+        });
     }
 
     public Member register(String hostName, String rootUrl, Sound sound) {
@@ -49,11 +58,10 @@ public class WebHookSoundService {
     private class SoundCall implements Callable<String> {
 
         private Member member;
-        private Sound sound;
 
         @Override
         public String call() throws Exception {
-            return restTemplate.getForEntity(member.rootUrl + "?sound=" + sound.name(), String.class)
+            return restTemplate.getForEntity(member.rootUrl + "?sound=" + member.getSound().name(), String.class)
                     .getBody();
         }
     }
