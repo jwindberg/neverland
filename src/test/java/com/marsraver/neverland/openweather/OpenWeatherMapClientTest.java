@@ -13,7 +13,7 @@ import java.util.concurrent.Executors;
 class OpenWeatherMapClientTest {
 
     private static final String rootUri = "https://api.openweathermap.org/data/2.5/weather";
-    private static final String apiKey = "af7bacb2cec87a1604e5e533d2c86cb3";
+    private static final String apiKey = "XXX";
     private static String fileRoot = "/Users/jwindberg/IdeaProjects/neverland/src/test/resources/cities/";
 
     private ObjectMapper objectMapper = new ObjectMapper();
