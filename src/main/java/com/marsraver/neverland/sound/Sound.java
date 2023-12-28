@@ -5,7 +5,8 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public enum Sound {
 
-  SONAR_PING("/sounds/sonar-ping.mp3"), SONAR_SWEEP("/sounds/sonar-sweep-beep.mp3");
+    SONAR_PING("/sounds/sonar-ping.mp3"), SONAR_SWEEP("/sounds/sonar-sweep-beep.mp3"),
+    THX_INTRO("/sounds/THX-Intro.mpg");
 
-  String file;
+    String file;
 }
